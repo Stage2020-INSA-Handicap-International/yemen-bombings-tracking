@@ -67,9 +67,9 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--images-dir', type=str, required=True)
     parser.add_argument('--output-path', type=str, required=True)
-    parser.add_argument('--patch-size', type=int, default=33)
-    parser.add_argument('--stride', type=int, default=14)
-    parser.add_argument('--scale', type=int, default=10)
+    parser.add_argument('--patch-size', type=int, default=32)
+    parser.add_argument('--stride', type=int, default=16)
+    parser.add_argument('--scale', type=int, default=50)
     parser.add_argument('--eval', action='store_true')
     args = parser.parse_args()
 

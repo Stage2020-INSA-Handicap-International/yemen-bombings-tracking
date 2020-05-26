@@ -17,9 +17,11 @@ def train(args):
             img = cv2.imread(path)
             images.append(img)
         elif "txt" in path :
+            labels.append(np.loadtxt(path).reshape(-1, 5))
 
-    h5_file.create_dataset('img', data=images)
-    h5_file.create_dataset('label', data=)
+
+    h5_file.create_dataset('gt', data=images)
+    h5_file.create_dataset('label', data=labels)
 
     h5_file.close()
 

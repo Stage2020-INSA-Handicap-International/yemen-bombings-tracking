@@ -9,7 +9,7 @@ import torch.backends.cudnn as cudnn
 from torch.utils.data.dataloader import DataLoader
 from tqdm import tqdm
 
-from model import SRCNN
+from model import SRCNN, Subpixel
 import data
 from data import TrainDataset, ValDataset
 from utils import AverageMeter, calc_psnr
@@ -20,12 +20,13 @@ if __name__ == '__main__':
     parser.add_argument('--train-file', type=str, required=True)
     parser.add_argument('--val-file', type=str, required=True)
     parser.add_argument('--outputs-dir', type=str, required=True)
-    parser.add_argument('--scale', type=int, default=10)
+    parser.add_argument('--scale', type=int, default=50)
     parser.add_argument('--lr', type=float, default=1e-4)
-    parser.add_argument('--batch-size', type=int, default=16)
+    parser.add_argument('--batch-size', type=int, default=64)
     parser.add_argument('--num-epochs', type=int, default=400)
-    parser.add_argument('--num-workers', type=int, default=8)
+    parser.add_argument('--num-workers', type=int, default=16)
     parser.add_argument('--seed', type=int, default=123)
+    parser.add_argument('--model', type=str, default="SRCNN")
     args = parser.parse_args()
 
     args.outputs_dir = os.path.join(args.outputs_dir, 'x{}'.format(args.scale))
@@ -38,7 +39,10 @@ if __name__ == '__main__':
 
     torch.manual_seed(args.seed)
 
-    model = SRCNN().to(device)
+    if(args.model == "SRCNN") :
+        model = SRCNN().to(device)
+    elif(args.model == "subpixel") :
+        model = Subpixel().to(device)
     criterion = nn.MSELoss()
     optimizer = optim.Adam([
         {'params': model.conv1.parameters()},

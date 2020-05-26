@@ -69,9 +69,11 @@ if cuda:
 
 model.train()
 
+image_size = opt.img_size
+
 # Get dataloader
 dataloader = torch.utils.data.DataLoader(
-    ListDataset(train_path), batch_size=opt.batch_size, shuffle=False, num_workers=opt.n_cpu
+    ListDataset(train_path, image_size), batch_size=opt.batch_size, shuffle=False, num_workers=opt.n_cpu
 )
 
 Tensor = torch.cuda.FloatTensor if cuda else torch.FloatTensor

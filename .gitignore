@@ -8,3 +8,7 @@ Augmentation/outputs/.DS_Store
 Augmentation/data/.DS_Store
 
 .DS_Store
+
+*.h5
+
+.idea/
