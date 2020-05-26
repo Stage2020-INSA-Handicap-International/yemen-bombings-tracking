@@ -12,4 +12,9 @@ Fetcher is used to get the data from the satellite Sentinel-2.
 - --end-date : self-explanatory. format ddmmYYYY
 - --level : Used to indicate what product type we are searching for. By default level is 1C (product type S2MSI1C) but level can be 2A (S2MSI2A)
 
+example :
+```sh
+ python fetcher.py --district-name "Marib" --start-date "10052020" --end-date "16052020" --level 2A
+```
+
 ## Utils
