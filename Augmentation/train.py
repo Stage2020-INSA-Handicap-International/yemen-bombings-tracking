@@ -10,8 +10,8 @@ from torch.utils.data.dataloader import DataLoader
 from tqdm import tqdm
 
 from model import SRCNN, Subpixel
-import data
-from data import TrainDataset, ValDataset
+import datasets
+from datasets import TrainDataset, ValDataset
 from utils import AverageMeter, calc_psnr
 
 
