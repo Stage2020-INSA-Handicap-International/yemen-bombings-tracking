@@ -46,6 +46,19 @@ def convert_ycbcr_to_rgb(img):
     else:
         raise Exception('Unknown Type', type(img))
 
+def calc_patch_size(func):
+    def wrapper(args):
+        if args.scale == 2:
+            args.patch_size = 10
+        elif args.scale == 3:
+            args.patch_size = 7
+        elif args.scale == 4:
+            args.patch_size = 6
+        else:
+            raise Exception('Scale Error', args.scale)
+        return func(args)
+    return wrapper
+
 
 class AverageMeter(object):
     def __init__(self):
@@ -62,3 +75,24 @@ class AverageMeter(object):
         self.sum += val * n
         self.count += n
         self.avg = self.sum / self.count
+
+import os
+from PIL import Image
+
+def convert_TIFF_JPG (tiff_path) :
+    for root, dirs, files in os.walk(tiff_path, topdown=False):
+        for name in files:
+            print(os.path.join(root, name))
+            if os.path.splitext(os.path.join(root, name))[1].lower() == ".tiff":
+                if os.path.isfile(os.path.splitext(os.path.join(root, name))[0] + ".jpg"):
+                    print("A jpeg file already exists for {}".format(name))
+                # If a jpeg is *NOT* present, create one from the tiff.
+                else:
+                    outfile = os.path.splitext(os.path.join(root, name))[0] + ".jpg"
+                    try:
+                        im = Image.open(os.path.join(root, name))
+                        print("Generating jpeg for {}".format(name))
+                        im.thumbnail(im.size)
+                        im.save(outfile, "JPEG", quality=100)
+                    except Exception as e:
+                        print(e)

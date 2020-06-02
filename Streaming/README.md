@@ -1,5 +1,6 @@
 # Streaming
-Fetch and process the data used in our model.
+
+Fetch and process the data used in our model
 
 ## Fetcher 
 Fetcher is used to get the data from the satellite Sentinel-2.
@@ -11,18 +12,4 @@ Fetcher is used to get the data from the satellite Sentinel-2.
 - --end-date : self-explanatory. format ddmmYYYY
 - --level : Used to indicate what product type we are searching for. By default level is 1C (product type S2MSI1C) but level can be 2A (S2MSI2A)
 
-example :
-```sh
- python fetcher.py --district-name "Marib" --start-date "10052020" --end-date "16052020" --level 2A
-```
-
-## Processor
-Used to process the information fetched by the fetcher for use in the augmentation module (into a TIFF file).
-
-- uses the same arguments as the fetcher
-- --path : path where the fetched data is saved to. By default in /data/unprocessed
-- --create-database : action used to decide if processor is used in order to generate a database or just uses the district name
-
 ## Utils
-functions : 
-split_into_tiles(in_path, out_path, filename, n) : splits a TIFF file into n parts.

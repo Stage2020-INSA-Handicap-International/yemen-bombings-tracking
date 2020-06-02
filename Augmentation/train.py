@@ -9,7 +9,7 @@ import torch.backends.cudnn as cudnn
 from torch.utils.data.dataloader import DataLoader
 from tqdm import tqdm
 
-from model import SRCNN, Subpixel
+from model import SRCNN, Subpixel, FSRCNN
 import datasets
 from datasets import TrainDataset, ValDataset
 from utils import AverageMeter, calc_psnr
@@ -22,11 +22,11 @@ if __name__ == '__main__':
     parser.add_argument('--outputs-dir', type=str, required=True)
     parser.add_argument('--scale', type=int, default=50)
     parser.add_argument('--lr', type=float, default=1e-4)
-    parser.add_argument('--batch-size', type=int, default=64)
+    parser.add_argument('--batch-size', type=int, default=128)
     parser.add_argument('--num-epochs', type=int, default=400)
-    parser.add_argument('--num-workers', type=int, default=16)
+    parser.add_argument('--num-workers', type=int, default=8)
     parser.add_argument('--seed', type=int, default=123)
-    parser.add_argument('--model', type=str, default="SRCNN")
+    parser.add_argument('--model', type=str, default="SRCNN", help="SRCNN, FSRCNN, Subpixel")
     args = parser.parse_args()
 
     args.outputs_dir = os.path.join(args.outputs_dir, 'x{}'.format(args.scale))
@@ -39,18 +39,29 @@ if __name__ == '__main__':
 
     torch.manual_seed(args.seed)
 
-    if(args.model == "SRCNN") :
+    print("Model : {}".format(args.model))
+    if args.model == "SRCNN":
         model = SRCNN().to(device)
-    elif(args.model == "subpixel") :
+        criterion = nn.MSELoss()
+        optimizer = optim.Adam([
+            {'params': model.conv1.parameters()},
+            {'params': model.conv2.parameters()},
+            {'params': model.conv3.parameters(), 'lr': args.lr * 0.1}
+        ], lr=args.lr)
+    elif args.model == "Subpixel": #TODO MAKE SUBPIXEL WORK
         model = Subpixel().to(device)
-    criterion = nn.MSELoss()
-    optimizer = optim.Adam([
-        {'params': model.conv1.parameters()},
-        {'params': model.conv2.parameters()},
-        {'params': model.conv3.parameters(), 'lr': args.lr * 0.1}
-    ], lr=args.lr)
+        criterion = nn.MSELoss()
+        optimizer = optimizer = optim.Adam(model.parameters(), lr=args.lr * 0.1)
+    elif args.model == "FSRCNN": #TODO MAKE FSRCNN WORK
+        model = FSRCNN(scale_factor=args.scale).to(device)
+        criterion = nn.MSELoss()
+        optimizer = optim.Adam([
+            {'params': model.first_part.parameters()},
+            {'params': model.mid_part.parameters()},
+            {'params': model.last_part.parameters(), 'lr': args.lr * 0.1}
+        ], lr=args.lr)
 
-    data.data_print(args.train_file)
+    # datasets.data_print(args.train_file)
 
     train_dataset = TrainDataset(args.train_file)
     train_dataloader = DataLoader(dataset=train_dataset,
@@ -92,7 +103,7 @@ if __name__ == '__main__':
                 t.set_postfix(loss='{:.6f}'.format(epoch_losses.avg))
                 t.update(len(inputs))
 
-        torch.save(model.state_dict(), os.path.join(args.outputs_dir, 'epoch_{}.pth'.format(epoch)))
+        torch.save(model.state_dict(), os.path.join(args.outputs_dir, '{}_epoch_{}.pth'.format(args.model,epoch)))
 
         model.eval()
         epoch_psnr = AverageMeter()
@@ -116,4 +127,4 @@ if __name__ == '__main__':
             best_weights = copy.deepcopy(model.state_dict())
 
     print('best epoch: {}, psnr: {:.2f}'.format(best_epoch, best_psnr))
-    torch.save(best_weights, os.path.join(args.outputs_dir, 'best.pth'))
+    torch.save(best_weights, os.path.join(args.outputs_dir, '{}_best.pth'.format(args.model)))
