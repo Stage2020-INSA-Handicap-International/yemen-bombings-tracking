@@ -18,6 +18,7 @@ if __name__ == '__main__':
     parser.add_argument('--image-dir', type=str, required=True)
     parser.add_argument('--scale', type=int, default=50)
     parser.add_argument('--model', type=str, default="SRCNN")
+    parser.add_argument('--test-data', action='store_true')
     args = parser.parse_args()
 
     cudnn.benchmark = True
@@ -39,8 +40,13 @@ if __name__ == '__main__':
 
     model.eval()
 
-    all_images = os.listdir('../{}'.format(args.image_dir))
-    os.chdir('../{}'.format(args.image_dir))
+    if not args.test_data :
+        all_images = os.listdir('../{}'.format(args.image_dir))
+        os.chdir('../{}'.format(args.image_dir))
+    else :
+        all_images = os.listdir(args.image_dir)
+        os.chdir(args.image_dir)
+        print(all_images)
 
     for image_file in all_images:
         if not ".DS_Store" in image_file :
@@ -57,22 +63,16 @@ if __name__ == '__main__':
                 image = np.transpose(image, (1, 2, 0)) # else image.shape = (3, n, n)
             else :
                 image = pil_image.open(image_file).convert('RGB')
-                image = np.array(image).astype(np.float32)
 
                 # Their downscaling
-                '''image_width = (image.width // args.scale) * args.scale
+                image_width = (image.width // args.scale) * args.scale
                 image_height = (image.height // args.scale) * args.scale
                 image = image.resize((image_width, image_height), resample=pil_image.BICUBIC)
                 image = image.resize((image.width // args.scale, image.height // args.scale), resample=pil_image.BICUBIC)
                 image = image.resize((image.width * args.scale, image.height * args.scale), resample=pil_image.BICUBIC)
-                image.save(args.image_file.replace('.', '_bicubic_x{}.'.format(args.scale))'''
+                image.save(image_file.replace('.', '_bicubic_x{}.'.format(args.scale)))
 
-                # My downscaling
-                '''image_width = (image.width // args.scale)
-                image_height = (image.height // args.scale)
-                image = image.resize((image_width, image_height), resample=pil_image.BICUBIC)
-                image = image.resize((image.width * args.scale, image.height * args.scale), resample=pil_image.BICUBIC)
-                image.save(args.image_file.replace('.', '_bicubic_x{}.'.format(args.scale)))'''
+                image = np.array(image).astype(np.float32)
 
             ycbcr = convert_rgb_to_ycbcr(image)
 
@@ -94,4 +94,4 @@ if __name__ == '__main__':
             output = np.array([preds, ycbcr[..., 1], ycbcr[..., 2]]).transpose([1, 2, 0])
             output = np.clip(convert_ycbcr_to_rgb(output), 0.0, 255.0).astype(np.uint8)
             output = pil_image.fromarray(output)
-            output.save(image_file.replace('.tiff', '_{}_x{}.jpg'.format(args.model, args.scale)))
+            output.save(image_file.replace('.jpg', '_{}_x{}.jpg'.format(args.model, args.scale)))

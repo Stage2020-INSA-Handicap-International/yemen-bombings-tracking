@@ -8,7 +8,7 @@ from utils import connect_to_api, unzip, split_into_tiles
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--api-file', type=str, default='SentinelAPIUser.json')
-    parser.add_argument('--district-file', type=str, default='yemen_districts.json')
+    parser.add_argument('--district-file', type=str, default='yemen_admin2_points.topojson')
     parser.add_argument('--district-name', type=str, required=True)
     parser.add_argument('--start-date', type=str, required=True, help="start date format dd/mm/YYYY")
     parser.add_argument('--end-date', type=str, required=True, help="end date format dd/mm/YYYY")

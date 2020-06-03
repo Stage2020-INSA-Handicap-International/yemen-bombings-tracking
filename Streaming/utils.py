@@ -4,9 +4,11 @@ from os import path
 
 from sentinelsat import SentinelAPI
 import json
+import geojson
 import pandas as pd
 import zipfile
 import math
+from shapely.geometry import shape
 
 
 def connect_to_api(file):
@@ -21,12 +23,27 @@ def connect_to_api(file):
 
 def extract_district_polygon(jsonfile, district_name):
     with open(jsonfile) as f:
-        district_polygon = json.load(f)
+        js = json.load(f)
 
-    district_polygon = pd.DataFrame(data=district_polygon, columns=["district", "WKT"])
-    district_geojson = district_polygon.loc[district_polygon['district'] == district_name]
+    district_polygon = pd.DataFrame(data=js, columns=["type", "coordinates", "properties"])
+#   district_polygon = pd.io.json.json_normalize(district_polygon.properties)
+#   district_geojson = district_polygon.loc[district_polygon['admin2Name_en'] == district_name]
 
-    return district_geojson['WKT'].values[0]
+    return district_polygon.loc[pd.io.json.json_normalize(district_polygon.properties)['admin2Name_en'] == district_name]
+
+def convert_geojson_to_WKT(t, coords) :
+    o = {
+        "coordinates":coords,
+        "type": t
+    }
+    s = json.dumps(o)
+    # Convert to geojson.geometry.Polygon
+    g1 = geojson.loads(s)
+    # Feed to shape() to convert to shapely.geometry.polygon.Polygon
+    # This will invoke its __geo_interface__ (https://gist.github.com/sgillies/2217756)
+    g2 = shape(g1)
+    # Now it's very easy to get a WKT representation
+    return g2.wkt
 
 
 def unzip(dir, file):

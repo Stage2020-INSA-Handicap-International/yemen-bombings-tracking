@@ -1,7 +1,7 @@
 import argparse
 import datetime
 
-from utils import connect_to_api, extract_district_polygon
+from utils import connect_to_api, extract_district_polygon, convert_geojson_to_WKT
 
 def fetch_products(api, args):
     product_type = "S2MSI{}".format(args.level)
@@ -13,6 +13,7 @@ def fetch_products(api, args):
     end_date = datetime.datetime.strptime(end_date, format_str)
 
     requested_footprint = extract_district_polygon(args.district_file, args.district_name)
+    requested_footprint = convert_geojson_to_WKT(requested_footprint['type'].values[0], requested_footprint['coordinates'].values[0])
     products = api.query(requested_footprint, date=(start_date, end_date), platformname='Sentinel-2', producttype=product_type)
 
     return products
@@ -20,7 +21,7 @@ def fetch_products(api, args):
 if __name__ == '__main__' :
     parser = argparse.ArgumentParser()
     parser.add_argument('--api-file', type=str, default='SentinelAPIUser.json')
-    parser.add_argument('--district-file', type=str, default='yemen_districts.json')
+    parser.add_argument('--district-file', type=str, default='yemen_admin2_points.topojson')
     parser.add_argument('--district-name', type=str, required=True)
     parser.add_argument('--start-date', type=str, required=True, help="start date format dd/mm/YYYY")
     parser.add_argument('--end-date', type=str, required=True, help="end date format dd/mm/YYYY")
@@ -32,4 +33,4 @@ if __name__ == '__main__' :
 
     products = fetch_products(api, args)
 
-    api.download_all(products, directory_path=args.path)
+    #api.download_all(products, directory_path=args.path)
