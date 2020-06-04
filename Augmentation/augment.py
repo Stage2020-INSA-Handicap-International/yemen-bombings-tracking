@@ -23,8 +23,8 @@ def prepare(args):
     label = h5_file.create_group('label')
     # TODO CREATE INFO
 
-    all_images = os.listdir('../{}'.format(args.satellite_image_dir))
-    os.chdir('../{}'.format(args.satellite_image_dir))
+    all_images = os.listdir('{}/'.format(args.processed_path))
+    os.chdir('{}/'.format(args.processed_path))
 
     for i, image_file in tqdm(enumerate(sorted(all_images))):
         if not ".DS_Store" in image_file:
@@ -39,7 +39,7 @@ def prepare(args):
             image = np.transpose(image, (1, 2, 0))  # else image.shape = (3, n, n)
             ycbcr = convert_rgb_to_ycbcr(image)
 
-            label.create_dataset(i, data=ycbcr)
+            label.create_dataset(str(i), data=ycbcr)
 
     h5_file.close()
 
@@ -81,5 +81,5 @@ def augment(args, dataset):
         output = np.array([preds, data[..., 1], data[..., 2]]).transpose([1, 2, 0])
         output = np.clip(convert_ycbcr_to_rgb(output), 0.0, 255.0).astype(np.uint8)
         output = pil_image.fromarray(output)
-        output.save('augmented_{}.jpg'.format(i)) #tiff or jpg
+        output.save('{}/augmented_{}.jpg'.format(args.augmented_path, i)) #tiff or jpg
         i = i+1

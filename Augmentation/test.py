@@ -49,9 +49,9 @@ if __name__ == '__main__':
         print(all_images)
 
     for image_file in all_images:
-        if not ".DS_Store" in image_file :
+        if not ".DS_Store" in image_file:
             # Load and normalise image
-            if "tiff" in image_file :
+            if "tiff" in image_file:
                 image = rio.open(r"{}".format(image_file), count=3)
                 band1 = image.read(1).astype(np.float32)
                 band1 /= band1.max()/255.0
@@ -94,4 +94,5 @@ if __name__ == '__main__':
             output = np.array([preds, ycbcr[..., 1], ycbcr[..., 2]]).transpose([1, 2, 0])
             output = np.clip(convert_ycbcr_to_rgb(output), 0.0, 255.0).astype(np.uint8)
             output = pil_image.fromarray(output)
-            output.save(image_file.replace('.jpg', '_{}_x{}.jpg'.format(args.model, args.scale)))
+            image_file = image_file.replace('.jpg', '_{}_x{}.jpg'.format(args.model, args.scale))
+            output.save(image_file.replace('.tiff', '_{}_x{}.jpg'.format(args.model, args.scale)))
