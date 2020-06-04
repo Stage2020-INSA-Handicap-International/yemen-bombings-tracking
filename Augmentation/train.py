@@ -24,7 +24,7 @@ if __name__ == '__main__':
     parser.add_argument('--lr', type=float, default=1e-4)
     parser.add_argument('--batch-size', type=int, default=128)
     parser.add_argument('--num-epochs', type=int, default=400)
-    parser.add_argument('--num-workers', type=int, default=8)
+    parser.add_argument('--num-workers', type=int, default=0)
     parser.add_argument('--seed', type=int, default=123)
     parser.add_argument('--model', type=str, default="SRCNN", help="SRCNN, FSRCNN, Subpixel")
     args = parser.parse_args()
@@ -103,6 +103,8 @@ if __name__ == '__main__':
                 t.set_postfix(loss='{:.6f}'.format(epoch_losses.avg))
                 t.update(len(inputs))
 
+                del inputs, labels, data
+
         torch.save(model.state_dict(), os.path.join(args.outputs_dir, '{}_epoch_{}.pth'.format(args.model,epoch)))
 
         model.eval()
@@ -118,6 +120,8 @@ if __name__ == '__main__':
                 preds = model(inputs).clamp(0.0, 1.0)
 
             epoch_psnr.update(calc_psnr(preds, labels), len(inputs))
+
+            del inputs, labels, data
 
         print('eval psnr: {:.2f}'.format(epoch_psnr.avg))
 
