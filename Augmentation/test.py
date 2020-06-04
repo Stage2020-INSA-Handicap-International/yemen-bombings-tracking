@@ -51,7 +51,7 @@ if __name__ == '__main__':
     for image_file in all_images:
         if not ".DS_Store" in image_file :
             # Load and normalise image
-            if "tiff" in image_file : #TODO AUGMENTATION ON TIFF FILE
+            if "tiff" in image_file :
                 image = rio.open(r"{}".format(image_file), count=3)
                 band1 = image.read(1).astype(np.float32)
                 band1 /= band1.max()/255.0

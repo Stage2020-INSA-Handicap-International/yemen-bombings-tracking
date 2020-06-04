@@ -48,3 +48,17 @@ class ValDataset(Dataset):
     def __len__(self):
         with h5py.File(self.h5_file, 'r') as f:
             return len(f['lr'])
+
+class HDF5Dataset(Dataset):
+    def __init__(self, h5_file):
+        super(HDF5Dataset, self).__init__()
+        self.h5_file = h5_file
+
+    def __getitem__(self, idx):
+        with h5py.File(self.h5_file, 'r') as f:
+            #TODO CASE WITH INFO
+            return f['label'][idx]
+
+    def __len__(self):
+        with h5py.File(self.h5_file, 'r') as f:
+            return len(f['label'])
