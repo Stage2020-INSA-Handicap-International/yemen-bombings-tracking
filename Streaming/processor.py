@@ -33,7 +33,8 @@ def process_products(unprocessed_path, processed_path, best_product) :
     split_into_tiles('Streaming/data/TC/{}_tc.tiff'.format(best_product.iloc[0]['identifier']), "{}/".format(processed_path),
                      best_product.iloc[0]['identifier'] + "_tc", 4)
 
-def create_database() : #TODO Create Database function
+def create_database() :
+    # Database that has every image of yemen and looks for bombs
     print("this function is still not developed")
 
 if __name__ == '__main__':

@@ -16,6 +16,10 @@ Image.MAX_IMAGE_PIXELS = 120560400
 from model import SRCNN, Subpixel, FSRCNN
 from utils import convert_rgb_to_ycbcr, convert_ycbcr_to_rgb, calc_psnr, convert_TIFF_JPG
 
+'''
+This module is used in main.py
+If the module needs to be used on its own, use prepare.py, train.py and test.py
+'''
 
 def prepare(args):
     h5_file = h5py.File(args.hdf5_file, 'w')  # args.hdf5_file
@@ -83,3 +87,4 @@ def augment(args, dataset):
         output = pil_image.fromarray(output)
         output.save('{}/augmented_{}.jpg'.format(args.augmented_path, i)) #tiff or jpg
         i = i+1
+        del data

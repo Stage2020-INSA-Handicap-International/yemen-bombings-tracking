@@ -1,7 +1,7 @@
 import argparse
 
 import Augmentation
-from Augmentation import augment
+from Augmentation import augment, datasets
 import Streaming
 from Streaming import fetcher, processor
 
@@ -19,7 +19,7 @@ if __name__ == '__main__' :
     parser.add_argument('--augmented-path', type=str, default='Detection/data/images')
     parser.add_argument('--model', type=str, default="SRCNN", help='SRCNN, Subpixel, FSRCNN')
     parser.add_argument('--augmentation-weights-file', type=str, default="Augmentation/outputs/x4/best.pth")
-    parser.add_argument('--create-database', action='store_true')# call create database function from processor
+    parser.add_argument('--create-database', action='store_true') # call create database function from processor
     args = parser.parse_args()
 
     # Fetch the data from sentinel-2 using api
@@ -32,10 +32,10 @@ if __name__ == '__main__' :
     api.download(best_product.iloc[0]['uuid'], directory_path=args.unprocessed_path)
     processor.process_products(args.unprocessed_path, args.processed_path, best_product)
 
-    # TODO Augment
+    # Augmentation module
     augment.prepare(args)
     # Create the hdf5 dataset
-    dataset = []
+    dataset = datasets.HDF5Dataset(args.hdf5_file)
     augment.augment(args, dataset)
-    # --------
+
     # TODO Add Detection module
