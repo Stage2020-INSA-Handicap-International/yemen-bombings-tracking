@@ -57,7 +57,7 @@ class HDF5Dataset(Dataset):
     def __getitem__(self, idx):
         with h5py.File(self.h5_file, 'r') as f:
             #TODO CASE WITH INFO
-            return f['label'][str(idx)]
+            return np.expand_dims(f['label'][str(idx)][:, :] / 255., 0)
 
     def __len__(self):
         with h5py.File(self.h5_file, 'r') as f:
