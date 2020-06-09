@@ -256,6 +256,9 @@ def to_categorical(y, num_classes):
     """ 1-hot encodes a tensor """
     return torch.from_numpy(np.eye(num_classes, dtype="uint8")[y])
 
+def to_cpu(tensor):
+    return tensor.detach().cpu()
+
 def rescale_boxes(boxes, current_dim, original_shape):
     """ Rescales bounding boxes to the original shape """
     orig_h, orig_w = original_shape

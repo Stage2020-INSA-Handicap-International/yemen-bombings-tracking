@@ -8,6 +8,7 @@ import torch
 from torch.utils.data import Dataset
 from PIL import Image
 import torchvision.transforms as transforms
+import torch.nn.functional as F
 
 ##import matplotlib.pyplot as plt
 ##import matplotlib.patches as patches
@@ -15,168 +16,120 @@ import torchvision.transforms as transforms
 from skimage.transform import resize
 
 import sys
-### A CHANGER POUR FAIRE UN HDF5
+# TODO Detection Dataset
 class DetectDataset(Dataset):
-    def __init__(self, h5_file, img_size):
+    def __init__(self, h5_file, img_size=416, augment=True, multiscale=True, normalized_labels=True):
         super(DetectDataset, self).__init__()
         self.h5_file = h5_file
-        self.img_shape = (img_size,img_size)
+        self.img_size = img_size
+        self.max_objects = 100
+        self.augment = augment
+        self.multiscale = multiscale
+        self.normalized_labels = normalized_labels
+        self.min_size = self.img_size - 3 * 32
+        self.max_size = self.img_size + 3 * 32
+        self.batch_count = 0
 
     def __getitem__(self, idx):
-
         #---------
         #  Image
         #---------
         with h5py.File(self.h5_file, 'r') as f:
-            img = np.array(f['gt'][idx])
-            labels = f['label'][idx]
+            gt = np.expand_dims(f['gt'][str(idx)][:, :] / 255., 0)
+            labels = np.expand_dims(f['label'][str(idx)][:, :] / 255., 0)
 
-        h, w, _ = img.shape
-        dim_diff = np.abs(h - w)
-        # Upper (left) and lower (right) padding
-        pad1, pad2 = dim_diff // 2, dim_diff - dim_diff // 2
-        # Determine padding
-        pad = ((pad1, pad2), (0, 0), (0, 0)) if h <= w else ((0, 0), (pad1, pad2), (0, 0))
-        # Add padding
-        input_img = np.pad(img, pad, 'constant', constant_values=128) / 255.
-        padded_h, padded_w, _ = input_img.shape
-        # Resize and normalize
-        input_img = resize(input_img, (*self.img_shape, 3), mode='reflect')
-        # Channels-first
-        input_img = np.transpose(input_img, (2, 0, 1))
-        # As pytorch tensor
-        input_img = torch.from_numpy(input_img).float()
+            img = transforms.ToTensor()(gt[0])
 
-        #---------
-        #  Label
-        #---------
+            # print(idx)
+            # print(img.dim())
+            # print("---")
 
-        # Extract coordinates for unpadded + unscaled image
-        x1 = w * (labels[:, 1] - labels[:, 3]/2)
-        y1 = h * (labels[:, 2] - labels[:, 4]/2)
-        x2 = w * (labels[:, 1] + labels[:, 3]/2)
-        y2 = h * (labels[:, 2] + labels[:, 4]/2)
-        # Adjust for added padding
-        x1 += pad[1][0]
-        y1 += pad[0][0]
-        x2 += pad[1][0]
-        y2 += pad[0][0]
-        # Calculate ratios from coordinates
-        labels[:, 1] = ((x1 + x2) / 2) / padded_w
-        labels[:, 2] = ((y1 + y2) / 2) / padded_h
-        labels[:, 3] *= w / padded_w
-        labels[:, 4] *= h / padded_h
-        # Fill matrix
-        filled_labels = np.zeros((1, 5))
-        if labels is not None:
-            filled_labels[range(len(labels))[:1]] = labels[:1]
-        filled_labels = torch.from_numpy(filled_labels)
+            # Handle images with less than three channels
+            if len(img.shape) != 3:
+                img = img.unsqueeze(0)
+                img = img.expand((3, img.shape[1:]))
 
-        return input_img, filled_labels
+            _, h, w = img.shape
+            h_factor, w_factor = (h, w) if self.normalized_labels else (1, 1)
+            # Pad to square resolution
+            img, pad = pad_to_square(img, 0)
+            _, padded_h, padded_w = img.shape
+
+            # ---------
+            #  Label
+            # ---------
+
+            boxes = torch.from_numpy(labels[0]).double()
+            # print(boxes.dim())
+            # print("---")
+
+            # Extract coordinates for unpadded + unscaled image
+            x1 = w_factor * (boxes[:, 1] - boxes[:, 3] / 2)
+            y1 = h_factor * (boxes[:, 2] - boxes[:, 4] / 2)
+            x2 = w_factor * (boxes[:, 1] + boxes[:, 3] / 2)
+            y2 = h_factor * (boxes[:, 2] + boxes[:, 4] / 2)
+            # Adjust for added padding
+            x1 += pad[0]
+            y1 += pad[2]
+            x2 += pad[1]
+            y2 += pad[3]
+            # Returns (x, y, w, h)
+            boxes[:, 1] = ((x1 + x2) / 2) / padded_w
+            boxes[:, 2] = ((y1 + y2) / 2) / padded_h
+            boxes[:, 3] *= w_factor / padded_w
+            boxes[:, 4] *= h_factor / padded_h
+
+            targets = torch.zeros((len(boxes), 6))
+            targets[:, 1:] = boxes
+
+            return img, targets
 
     def __len__(self):
         with h5py.File(self.h5_file, 'r') as f:
             return len(f['label'])
 
-
-class ImageFolder(Dataset):
-    def __init__(self, folder_path, img_size=416):
-        self.files = sorted(glob.glob('%s/*.*' % folder_path))
-        self.img_shape = (img_size, img_size)
-
-    def __getitem__(self, index):
-        img_path = self.files[index % len(self.files)]
-        # Extract image
-        img = np.array(Image.open(img_path))
-        h, w, _ = img.shape
-        dim_diff = np.abs(h - w)
-        # Upper (left) and lower (right) padding
-        pad1, pad2 = dim_diff // 2, dim_diff - dim_diff // 2
-        # Determine padding
-        pad = ((pad1, pad2), (0, 0), (0, 0)) if h <= w else ((0, 0), (pad1, pad2), (0, 0))
-        # Add padding
-        input_img = np.pad(img, pad, 'constant', constant_values=127.5) / 255.
-        # Resize and normalize
-        input_img = resize(input_img, (*self.img_shape, 3), mode='reflect')
-        # Channels-first
-        input_img = np.transpose(input_img, (2, 0, 1))
-        # As pytorch tensor
-        input_img = torch.from_numpy(input_img).float()
-
-        return img_path, input_img
-
-    def __len__(self):
-        return len(self.files)
+    def collate_fn(self, batch):
+        imgs, targets = list(zip(*batch))
+        # Remove empty placeholder targets
+        targets = [boxes for boxes in targets if boxes is not None]
+        # Add sample index to targets
+        for i, boxes in enumerate(targets):
+            boxes[:, 0] = i
+        targets = torch.cat(targets, 0)
+        # Selects new image size every tenth batch
+        if self.multiscale and self.batch_count % 10 == 0:
+            self.img_size = random.choice(range(self.min_size, self.max_size + 1, 32))
+        # Resize images to input shape
+        imgs = torch.stack([resize(img, self.img_size) for img in imgs])
+        self.batch_count += 1
+        return imgs, targets
 
 
-class ListDataset(Dataset):
-    def __init__(self, list_path, img_size=416):
-        self.label_files = [path.replace('images', 'labels').replace('.jpg', '.txt') for path in self.img_files]
-        self.img_shape = (img_size, img_size)
-        self.max_objects = 1
+def pad_to_square(img, pad_value):
+    c, h, w = img.shape
+    dim_diff = np.abs(h - w)
+    # (upper / left) padding and (lower / right) padding
+    pad1, pad2 = dim_diff // 2, dim_diff - dim_diff // 2
+    # Determine padding
+    pad = (0, 0, pad1, pad2) if h <= w else (pad1, pad2, 0, 0)
+    # Add padding
+    img = F.pad(img, pad, "constant", value=pad_value)
 
-    def __getitem__(self, index):
+    return img, pad
 
-        #---------
-        #  Image
-        #---------
 
-        img_path = self.img_files[index % len(self.img_files)].rstrip()
-        img = np.array(Image.open(img_path))
+def resize(image, size):
+    image = F.interpolate(image.unsqueeze(0), size=size, mode="nearest").squeeze(0)
+    return image
 
-        # Handles images with less than three channels
-        while len(img.shape) != 3:
-            index += 1
-            img_path = self.img_files[index % len(self.img_files)].rstrip()
-            img = np.array(Image.open(img_path))
 
-        h, w, _ = img.shape
-        dim_diff = np.abs(h - w)
-        # Upper (left) and lower (right) padding
-        pad1, pad2 = dim_diff // 2, dim_diff - dim_diff // 2
-        # Determine padding
-        pad = ((pad1, pad2), (0, 0), (0, 0)) if h <= w else ((0, 0), (pad1, pad2), (0, 0))
-        # Add padding
-        input_img = np.pad(img, pad, 'constant', constant_values=128) / 255.
-        padded_h, padded_w, _ = input_img.shape
-        # Resize and normalize
-        input_img = resize(input_img, (*self.img_shape, 3), mode='reflect')
-        # Channels-first
-        input_img = np.transpose(input_img, (2, 0, 1))
-        # As pytorch tensor
-        input_img = torch.from_numpy(input_img).float()
+def random_resize(images, min_size=288, max_size=448):
+    new_size = random.sample(list(range(min_size, max_size + 1, 32)), 1)[0]
+    images = F.interpolate(images, size=new_size, mode="nearest")
+    return images
 
-        #---------
-        #  Label
-        #---------
 
-        label_path = self.label_files[index % len(self.img_files)].rstrip()
-
-        labels = None
-        if os.path.exists(label_path):
-            labels = np.loadtxt(label_path).reshape(-1, 5)
-            # Extract coordinates for unpadded + unscaled image
-            x1 = w * (labels[:, 1] - labels[:, 3]/2)
-            y1 = h * (labels[:, 2] - labels[:, 4]/2)
-            x2 = w * (labels[:, 1] + labels[:, 3]/2)
-            y2 = h * (labels[:, 2] + labels[:, 4]/2)
-            # Adjust for added padding
-            x1 += pad[1][0]
-            y1 += pad[0][0]
-            x2 += pad[1][0]
-            y2 += pad[0][0]
-            # Calculate ratios from coordinates
-            labels[:, 1] = ((x1 + x2) / 2) / padded_w
-            labels[:, 2] = ((y1 + y2) / 2) / padded_h
-            labels[:, 3] *= w / padded_w
-            labels[:, 4] *= h / padded_h
-        # Fill matrix
-        filled_labels = np.zeros((self.max_objects, 5))
-        if labels is not None:
-            filled_labels[range(len(labels))[:self.max_objects]] = labels[:self.max_objects]
-        filled_labels = torch.from_numpy(filled_labels)
-
-        return img_path, input_img, filled_labels
-
-    def __len__(self):
-        return len(self.img_files)
+def horisontal_flip(images, targets):
+    images = torch.flip(images, [-1])
+    targets[:, 2] = 1 - targets[:, 2]
+    return images, targets

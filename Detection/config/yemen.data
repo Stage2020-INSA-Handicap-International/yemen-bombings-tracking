@@ -1,0 +1,4 @@
+classes = 1
+train=dataset.h5
+valid=val_dataset.h5
+names=config/yemen.names

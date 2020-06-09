@@ -15,7 +15,8 @@ if __name__ == '__main__' :
     parser.add_argument('--level', type=str, default='1C', help="1C or 2A")
     parser.add_argument('--unprocessed-path', type=str, default='Streaming/data/unprocessed')
     parser.add_argument('--processed-path', type=str, default='Augmentation/data/processed')
-    parser.add_argument('--hdf5-file', type=str, default='Augmentation/processed_dataset.h5')
+    parser.add_argument('--augmentation-hdf5', type=str, default='Augmentation/processed_dataset.h5')
+    parser.add_argument('--detection-hdf5', type=str, default='Detection/dataset.h5')
     parser.add_argument('--augmented-path', type=str, default='Detection/data/images')
     parser.add_argument('--model', type=str, default="SRCNN", help='SRCNN, Subpixel, FSRCNN')
     parser.add_argument('--augmentation-weights-file', type=str, default="Augmentation/outputs/x4/best.pth")
@@ -35,7 +36,7 @@ if __name__ == '__main__' :
     # Augmentation module
     augment.prepare(args)
     # Create the hdf5 dataset
-    dataset = datasets.HDF5Dataset(args.hdf5_file)
+    dataset = datasets.HDF5Dataset(args.augmentation_hdf5)
     augment.augment(args, dataset)
 
     # TODO Add Detection module
