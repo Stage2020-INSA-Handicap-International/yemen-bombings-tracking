@@ -4,13 +4,13 @@ import torch
 import torch.backends.cudnn as cudnn
 import numpy as np
 from PIL import Image
+
 Image.MAX_IMAGE_PIXELS = 120560400
 import PIL.Image as pil_image
 import rasterio as rio
 
 from model import SRCNN, Subpixel
 from utils import convert_rgb_to_ycbcr, convert_ycbcr_to_rgb, calc_psnr, convert_TIFF_JPG
-
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
@@ -25,9 +25,9 @@ if __name__ == '__main__':
     device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
 
     # Load model to device
-    if(args.model == "SRCNN") :
+    if (args.model == "SRCNN"):
         model = SRCNN().to(device)
-    elif(args.model == "Subpixel") :
+    elif (args.model == "Subpixel"):
         model = Subpixel().to(device)
 
     # Load weights
@@ -40,10 +40,10 @@ if __name__ == '__main__':
 
     model.eval()
 
-    if not args.test_data :
+    if not args.test_data:
         all_images = os.listdir('../{}'.format(args.image_dir))
         os.chdir('../{}'.format(args.image_dir))
-    else :
+    else:
         all_images = os.listdir(args.image_dir)
         os.chdir(args.image_dir)
         print(all_images)
@@ -54,21 +54,22 @@ if __name__ == '__main__':
             if "tiff" in image_file:
                 image = rio.open(r"{}".format(image_file), count=3)
                 band1 = image.read(1).astype(np.float32)
-                band1 /= band1.max()/255.0
+                band1 /= band1.max() / 255.0
                 band2 = image.read(2).astype(np.float32)
                 band2 /= band2.max() / 255.0
                 band3 = image.read(3).astype(np.float32)
                 band3 /= band3.max() / 255.0
                 image = np.array((band1, band2, band3)).astype(np.float32)
-                image = np.transpose(image, (1, 2, 0)) # else image.shape = (3, n, n)
-            else :
+                image = np.transpose(image, (1, 2, 0))  # else image.shape = (3, n, n)
+            else:
                 image = pil_image.open(image_file).convert('RGB')
 
                 # Their downscaling
                 image_width = (image.width // args.scale) * args.scale
                 image_height = (image.height // args.scale) * args.scale
                 image = image.resize((image_width, image_height), resample=pil_image.BICUBIC)
-                image = image.resize((image.width // args.scale, image.height // args.scale), resample=pil_image.BICUBIC)
+                image = image.resize((image.width // args.scale, image.height // args.scale),
+                                     resample=pil_image.BICUBIC)
                 image = image.resize((image.width * args.scale, image.height * args.scale), resample=pil_image.BICUBIC)
                 image.save(image_file.replace('.', '_bicubic_x{}.'.format(args.scale)))
 

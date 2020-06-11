@@ -13,6 +13,7 @@ from model import SRCNN, Subpixel, FSRCNN
 import datasets
 from datasets import TrainDataset, ValDataset
 from utils import AverageMeter, calc_psnr
+from torchsummary import summary
 
 
 if __name__ == '__main__':
@@ -73,6 +74,8 @@ if __name__ == '__main__':
     val_dataset = ValDataset(args.val_file)
     val_dataloader = DataLoader(dataset=val_dataset, batch_size=1)
 
+    summary(model, input_size=(1, 32, 32))
+
     best_weights = copy.deepcopy(model.state_dict())
     best_epoch = 0
     best_psnr = 0.0
@@ -89,7 +92,6 @@ if __name__ == '__main__':
 
                 inputs = inputs.to(device)
                 labels = labels.to(device)
-
                 preds = model(inputs)
 
                 loss = criterion(preds, labels)

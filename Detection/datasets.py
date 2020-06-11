@@ -18,7 +18,7 @@ from skimage.transform import resize
 import sys
 # TODO Detection Dataset
 class DetectDataset(Dataset):
-    def __init__(self, h5_file, img_size=416, augment=True, multiscale=True, normalized_labels=True):
+    def __init__(self, h5_file, img_size=4800, augment=True, multiscale=True, normalized_labels=True):
         super(DetectDataset, self).__init__()
         self.h5_file = h5_file
         self.img_size = img_size

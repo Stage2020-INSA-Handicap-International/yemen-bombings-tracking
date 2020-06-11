@@ -1,7 +1,7 @@
 import argparse
 import datetime
 
-from utils import connect_to_api, extract_district_polygon, convert_geojson_to_WKT
+from .utils import connect_to_api, extract_district_polygon, convert_geojson_to_WKT
 
 def fetch_products(api, args):
     product_type = "S2MSI{}".format(args.level)

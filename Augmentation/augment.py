@@ -13,8 +13,8 @@ import rasterio as rio
 
 Image.MAX_IMAGE_PIXELS = 120560400
 
-from model import SRCNN, Subpixel, FSRCNN
-from utils import convert_rgb_to_ycbcr, convert_ycbcr_to_rgb, calc_psnr, convert_TIFF_JPG
+from .model import SRCNN, Subpixel, FSRCNN
+from .utils import convert_rgb_to_ycbcr, convert_ycbcr_to_rgb, calc_psnr, convert_TIFF_JPG
 
 '''
 This module is used in main.py
@@ -22,7 +22,7 @@ If the module needs to be used on its own, use prepare.py, train.py and test.py
 '''
 
 def prepare(args):
-    h5_file = h5py.File(args.hdf5_file, 'w')  # args.hdf5_file
+    h5_file = h5py.File(args.augmentation_hdf5, 'w')  # args.hdf5_file
 
     label = h5_file.create_group('label')
     # TODO CREATE INFO
