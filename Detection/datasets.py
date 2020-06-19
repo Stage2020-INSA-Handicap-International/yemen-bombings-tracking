@@ -82,7 +82,7 @@ class DetectDataset(Dataset):
             targets = torch.zeros((len(boxes), 6))
             targets[:, 1:] = boxes
 
-            return img, targets
+            return img.float(), targets.float()
 
     def __len__(self):
         with h5py.File(self.h5_file, 'r') as f:

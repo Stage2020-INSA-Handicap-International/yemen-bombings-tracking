@@ -23,7 +23,7 @@ if __name__ == '__main__':
     parser.add_argument('--outputs-dir', type=str, required=True)
     parser.add_argument('--scale', type=int, default=50)
     parser.add_argument('--lr', type=float, default=1e-4)
-    parser.add_argument('--batch-size', type=int, default=128)
+    parser.add_argument('--batch-size', type=int, default=256)
     parser.add_argument('--num-epochs', type=int, default=400)
     parser.add_argument('--num-workers', type=int, default=4)
     parser.add_argument('--seed', type=int, default=123)
@@ -50,7 +50,7 @@ if __name__ == '__main__':
             {'params': model.conv3.parameters(), 'lr': args.lr * 0.1}
         ], lr=args.lr)
     elif args.model == "Subpixel": #TODO MAKE SUBPIXEL WORK
-        model = Subpixel().to(device)
+        model = Subpixel(upscale_factor=args.scale).to(device)
         criterion = nn.MSELoss()
         optimizer = optimizer = optim.Adam(model.parameters(), lr=args.lr * 0.1)
     elif args.model == "FSRCNN": #TODO MAKE FSRCNN WORK

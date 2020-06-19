@@ -28,15 +28,19 @@ if __name__ == '__main__':
     if (args.model == "SRCNN"):
         model = SRCNN().to(device)
     elif (args.model == "Subpixel"):
-        model = Subpixel().to(device)
+        model = Subpixel(upscale_factor=args.scale).to(device)
 
     # Load weights
-    state_dict = model.state_dict()
+    '''state_dict = model.state_dict()
     for n, p in torch.load(args.weights_file, map_location=lambda storage, loc: storage).items():
         if n in state_dict.keys():
             state_dict[n].copy_(p)
         else:
-            raise KeyError(n)
+            raise KeyError(n)'''
+
+    # print(torch.load(args.weights_file))
+
+    model.load_state_dict(torch.load(args.weights_file))
 
     model.eval()
 
