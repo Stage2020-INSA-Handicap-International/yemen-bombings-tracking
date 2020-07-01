@@ -24,7 +24,7 @@ def preprocess(dataset) :
             src = cv2.equalizeHist(src)
             target = cv2.equalizeHist(target)
 
-        matched = match_histograms(src, target, multichannel=True)
+        matched = match_histograms(src, target, multichannel=False)
         # threshold up
         t_up = 255
         # threshold down
@@ -37,7 +37,8 @@ def preprocess(dataset) :
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--unprocessed-hdf5', type=str, default="unprocessed.h5")
+    parser.add_argument('--preprocessed-path', type=str, default="data/preprocessed")
     args = parser.parse_args()
 
-    dataset = HDF5torch(args.preprocessed_hdf5)
+    dataset = HDF5torch(args.unprocessed_hdf5)
     preprocess(dataset)

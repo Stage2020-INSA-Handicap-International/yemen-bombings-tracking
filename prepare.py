@@ -31,7 +31,7 @@ def prepare_preprocessing(args):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--unprocessed-path', type=str, required=True)
+    parser.add_argument('--unprocessed-path', type=str, default="data/unprocessed")
     parser.add_argument('--unprocessed-hdf5', type=str, default="unprocessed.h5")
     parser.add_argument('--preprocess', action='store_true')
     args = parser.parse_args()
