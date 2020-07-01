@@ -7,13 +7,13 @@ from PIL import Image
 
 class HDF5torch(Dataset):
     def __init__(self, h5_file):
-        super(HDF5Dataset, self).__init__()
+        super(HDF5torch, self).__init__()
         self.h5_file = h5_file
 
     def __getitem__(self, idx):
         with h5py.File(self.h5_file, 'r') as f:
-            if f['info'] == 'preprocess':
-                return np.expand_dims(f['label'][str(idx)][:, :] / 255., 0)
+            #if f['info'][str(1)] == 'unprocessed':
+            return f['label'][str(idx)][:, :], f['target'][str(idx)][:, :]
 
     def __len__(self):
         with h5py.File(self.h5_file, 'r') as f:

@@ -1,3 +1,6 @@
+import cv2
+import numpy as np
+
 def histogram_equalization(img_in):
     # segregate color streams
     b, g, r = cv2.split(img_in)
