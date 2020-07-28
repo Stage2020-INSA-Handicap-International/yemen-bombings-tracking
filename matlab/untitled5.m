@@ -16,10 +16,10 @@ end
 %template = BW(rect(2):rect(2)+rect(4),rect(1):rect(1)+rect(3),:);
 % Show template - this is the extent you selected during "getrect"
 template=rgb2gray(imread(template));
-imshow(template)
+%imshow(template)
 for Ang=0:step:angle % rotate the template Itm 1 degree at the time and look for it in the image Is
     Itr=Rotate_binary_edge_image(template,Ang);
-    disp([num2str((Ang)/3.6) '% Scanned' ' Ang: ' num2str(Ang) '°']);
+    disp([num2str(100*Ang/angle) '% Scanned' ' Ang: ' num2str(Ang) '°']);
     % Calculate how much said template correlates on each pixel in the image
     C = normxcorr2(Itr,BW);
     % Remove padded borders from correlation
@@ -43,6 +43,6 @@ for Ang=0:step:angle % rotate the template Itm 1 degree at the time and look for
     I = fillmissing(I,'constant',0);
     % Display new image
 end
-figure; imshow(I)
+%figure; imshow(I)
 end
 
