@@ -1,5 +1,5 @@
 # yemen-bombings-tracking
-Tracing a bombing map in Yemen
+Projet de tracage et de detections de bombardements au Yemen grâce a des images satelittes méné par [BETTINGER Matthieu](), [HAFID Salim]() et [SADER Bruno]() pour Handicap International en colaboration avec La Fondation INSA
 
 # Sommaire
 ## Architecture d'augmentation et de detection des bombardements grâce à Sentinel
@@ -32,6 +32,17 @@ Ce module utilise les meme arguments que fetcher
 #### Le module utils contient toutes les fonctiones annexes utiles aux modules
 
 ### Augmentation d'image
+
+#### Le module **prepare**
+#### Le module **datasets**
+#### Le module **model**
+
+##### SRCNN
+<center><img src="SRCNN_figure.png"></center>
+
+#### Les module **train** et **test**
+#### Le module **augment**
+
 ### Detection des bombardements
 ### Architecture
 ## Detection et comparaison d'images 
