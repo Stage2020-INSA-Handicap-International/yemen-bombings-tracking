@@ -1,5 +1,5 @@
 # yemen-bombings-tracking
-Projet de tracage et de detections de bombardements au Yemen grâce a des images satelittes méné par [BETTINGER Matthieu](), [HAFID Salim]() et [SADER Bruno]() pour Handicap International en colaboration avec La Fondation INSA
+Projet de tracage et de detections de bombardements au Yemen grâce a des images satelittes méné par [BETTINGER Matthieu](), [HAFID Salim]() et [SADER Bruno]() pour Handicap International en colaboration avec La Fondation INSA.
 
 # Sommaire
 ## Architecture d'augmentation et de detection des bombardements grâce à Sentinel
@@ -70,9 +70,24 @@ Model implémenté selon ["Guided Super-Resolution as Pixel-to-Pixel Transformat
 Ce model permet d'appliqué l'information d'une image lr à une image hr afin d'avoir une image de bonne qualité avec les informations supplémentaires.<br>
 <center><img src="subpix_figure.png"></center>
 
-  
+#### Les modules **train** et **test**
 
-#### Les module **train** et **test**
+- Le module train<br>
+Le module sert, comme son nom l'indique, à entrainer nos modeles.<br>
+*--train-file* : est le chemin vers le fichier hdf5 d'entrainement <br>
+*--val-file* : est le chemin vers le fichier hdf5 de validation <br>
+*--output-dir* : est le chemin vers le dossier ou nous souhaitons sauvegarder les poids du model<br>
+*--scale* : est le facteur d'augmentation<br>
+*--lr* : est le learning rate<br>
+*--batch-size* : est la taille de chaque batch<br>
+*--model* : permet d'indiquer le model qu'on souhaite entrainer<br>
+*--num-epochs* : est le nombre d'epoch sur lesquels nous souhaitons entrainer<br>
+
+L'entrainement du model est fait grace à des images Google Earth (hr) qui sont reduites afin d'avoir la meme image de basse qualité. Nous entrainons donc le model à recreer l'image de base en partant de l'image lr. Afin d'evaluer le model nous utilisons comme métrique le PSNR (Peak Signal to Noise Ratio) qui est défini par la formule suivante :<br>
+PSNR = *10*$\times$$log_{10}$$\frac{d^2}{EQM}$ avec EQM l'erreur quadratique moyenne, et $d^2$ la dynamique du signal (la valeur maximum possible pour un pixel).
+
+- Le module test<br>
+
 #### Le module **augment**
 ### Detection des bombardements
 ### Architecture
