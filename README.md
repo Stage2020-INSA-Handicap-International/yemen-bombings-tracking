@@ -113,12 +113,35 @@ Implementation du model Yolov3 utilisant ce [depot git](https://github.com/erikl
 Yolo est un algortihme qui identifie dans une image des objets specifiés. Dans notre cas, ce sont des bombardements. Afin de pouvoir les retrouver, nous avons besoin d'avoir des images labelisées (dont les parties de l'image contenant les bombardements sont encadrées).<br>
 Pour labeliser les images, l'outil [labelImg](https://github.com/tzutalin/labelImg) est utilisé.
 <center><img src="https://github.com/ydixon/yolo_v3/blob/master/doc/x_wing.gif" width="600"></center>
+
 ### Les modules **train** et **detect**
-- train
-- detect
+Les deux modules sont importés du depot git [PyTorch Yolov3](https://github.com/eriklindernoren/PyTorch-YOLOv3).
 
+## Main
+Afin de lancer le workflow complet, le module principal ```main``` est utilisé. Ce module combine tout les modules précedemments décrits. <br>
+A noté que le module de detection n'est toujours pas integré car n'a pas pu etre entrainé.
 
-## Architecture et module principal
+*--api-file* : utilisé pour initialiser la connexion avec l'API sentinelsat avec un fichier json contenant "user" et "pass". Par défaut, utilise le document appelé SentinelAPIUser.json.<br>
+*--district-file* : json contenant une liste de tous les districts (dans notre cas tous les districts du Yémen) et leur polygone correspondant.<br>
+*--district-name* : nécessaire pour récupérer les informations d'un district particulier.<br>
+*--start-date* : format ddmmYYYY<br>
+*--end-date* : format ddmmYYYY<br>
+*--level* : utilisé pour indiquer le type de produit que nous recherchons. Par défaut, le niveau est 1C (type de produit S2MSI1C) mais le niveau peut être 2A (S2MSI2A)<br>
+*--unprocessed-path* : qui est le chemin vers les images non traitées<br>
+*--processed-path* : qui est le chemin vers le dossier ou non souhaitons sauvegarder l'image traité<br>
+*--augmentation-hdf5* : est le chemin vers le fichier hdf5 d'augmentation. <br>
+*--detection-hdf5* : est le chemin vers le fichier hdf5 de detection. <br>
+*--model* : parametre qui permet d'indiquer le model d'augmentation a utiliser<br>
+*--augmentation-weights* : chemin vers le fichier des poids du model d'augmentation<br>
+
+L'architecture est la suivante :
+- Le module Streaming (qui contient toutes la logique de Sentinel) se connect à l'api grâce à l'argument --api-file et la fonction ```connect_to_api```.
+- Le fetcher recupère les produits qui repondent au criteres parametrés (fonction ```fetch_products```).
+- Pre-processing en utilisant le processor et sa fonction ```process_products```.
+- Ensuite le module d'augmentation perpare les images selon les criteres parametrés.
+- Le module d'augmentation les images preparées.
+- Finalement le module de detection devrait etre integré ici afin de travailler sur les images augmentées.
+
 ## Requirements
 
 - PyTorch
