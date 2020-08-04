@@ -1,13 +1,13 @@
 # yemen-bombings-tracking
-Projet de tracage et de detections de bombardements au Yemen grâce a des images satelittes méné par [BETTINGER Matthieu](), [HAFID Salim]() et [SADER Bruno]() pour Handicap International en colaboration avec La Fondation INSA.
+Projet de tracage et de detections de bombardements au Yemen grâce a des images satelittes méné par [BETTINGER Matthieu](), [HAFID Salim]() et [SADER Bruno](https://www.linkedin.com/in/bruno-sader/) pour Handicap International en colaboration avec La Fondation INSA.
 
 # Sommaire
-## Architecture d'augmentation et de detection des bombardements grâce à Sentinel
-### Sentinel
+# Architecture d'augmentation et de detection des bombardements grâce à Sentinel
+## Sentinel
 Sentinel est un groupe de satelittes gratuitement accessible de Agence spatiale européenne.
 Les satelittes les plus precis sont les Sentinel-2A/B pour la qualité d'image et le Sentinel 5p pour les parametres atmospheriques (O3, CH4, NO2 etc...)
 
-#### Le module **fetcher** est utilisé pour obtenir les données du satellite Sentinel-2.
+### Le module **fetcher** est utilisé pour obtenir les données du satellite Sentinel-2.
 
 *--api-file* : utilisé pour initialiser la connexion avec l'API sentinelsat avec un fichier json contenant "user" et "pass". Par défaut, utilise le document appelé SentinelAPIUser.json.<br>
 *--district-file* : json contenant une liste de tous les districts (dans notre cas tous les districts du Yémen) et leur polygone correspondant.<br>
@@ -18,7 +18,7 @@ Les satelittes les plus precis sont les Sentinel-2A/B pour la qualité d'image e
 
 La doc sentinelsat peut etre trouvé sur https://sentinelsat.readthedocs.io/en/stable/.
 
-#### Le module **processor** est utilisé afin de traiter les images obtenues grace au fetcher.
+### Le module **processor** est utilisé afin de traiter les images obtenues grace au fetcher.
 
 la fonction ```process_products(unprocessed_path, processed_path, best_product)``` prend en entrée trois parametres:
 1. *unprocessed_path*: qui est le chemin vers les images non traitées
@@ -29,13 +29,13 @@ Cette fonction sert a combiner les 3 bandes de couleurs (Rouge/Vert/Bleu) en une
 
 Ce module utilise les meme arguments que fetcher
 
-#### Le module utils contient toutes les fonctiones annexes utiles aux modules
+### Le module utils contient toutes les fonctiones annexes utiles aux modules
 
-### Augmentation d'image
+## Augmentation d'image
 
 L'augmentation d'image est un processus visant à ameliorer la qualité d'une image source. Les images Sentinel etant de trop "basse" qualité ($10m^2$), l'augmentation aurait permit au model de detection de mieux fonctionner.
 
-#### Le module **prepare**
+### Le module **prepare**
 Ce module est un peu particulier car il est utilisé en amont afin de preparer nos données sous un format specifique utilisable par nos modeles.<br>
 Les images sont donc traitées selon la litterature (["Image Super-Resolution Using Deep Convolutional Networks"](https://arxiv.org/abs/1501.00092) pour le SRCNN par exemple) et stockées dans un fichier hdf5 (ce fichier permettant ensuite de plus facilement utiliser les images traitées et de les partager avec une vm ou un serveur).<br>
 Les images sont traitées de la maniere suivante: 
@@ -48,11 +48,11 @@ Les images sont traitées de la maniere suivante:
 *--eval* : est un parametre qui permet d'indiquer si nous preparons l'image à etre testée.<br>
 *--scale* : est un parametre qui permet d'indiquer quel est la diminution de resolution souhaitée.<br>
 
-#### Le module **datasets**
+### Le module **datasets**
 
 Le module dataset permet de transformer le fichier hdf5 en un object pytorch ([Dataset](https://pytorch.org/docs/stable/data.html#torch.utils.data.Dataset)) interpretable par notre model (util pour l'apprentissage et l'évaluation)
 
-#### Le module **model**
+### Le module **model**
 
 Le module contient les differents modeles testés lors du developement<br>
 Les 3 modeles qui sont integrés sont:
@@ -68,9 +68,9 @@ Model implementé selon ["Accelerating the Super-Resolution Convolutional Neural
 -  SubPixel<br>
 Model implémenté selon ["Guided Super-Resolution as Pixel-to-Pixel Transformation"](https://arxiv.org/abs/1904.01501) et grace au [dépôt git](https://github.com/riccardodelutio/PixTransform).<br>
 Ce model permet d'appliqué l'information d'une image lr à une image hr afin d'avoir une image de bonne qualité avec les informations supplémentaires.<br>
-<center><img src="subpix_figure.png"></center>
+<center><img src="subpix_figure.png" width="500"></center>
 
-#### Les modules **train** et **test**
+### Les modules **train** et **test**
 
 - Le module train<br>
 Le module sert, comme son nom l'indique, à entrainer nos modeles.<br>
@@ -87,11 +87,39 @@ L'entrainement du model est fait grace à des images Google Earth (hr) qui sont 
 PSNR = *10*$\times$$log_{10}$$\frac{d^2}{EQM}$ avec EQM l'erreur quadratique moyenne, et $d^2$ la dynamique du signal (la valeur maximum possible pour un pixel).
 
 - Le module test<br>
+*--weights-file* : le chemin vers le fichier des poids (.pth) <br>
+*--image-dir* : le chemin vers le dossier des images<br>
+*--scale* : est le facteur d'augmentation<br>
+*--model* : permet de choisir le model qu'on teste<br>
+*--test-data* : permet de specifier si nous voulons utiliser des images qui sont dans le répertoire courant<br>
 
-#### Le module **augment**
-### Detection des bombardements
-### Architecture
-### Requirements
+### Le module **augment**
+Ce module utilise le modele entrainé et augmente les images.<br>
+Il est utilisé dans le module principal ```main```
+
+## Detection des bombardements
+La detection des bombardements est fait grace a un modele d'apprentissage machine qui apprend a determiner sur une image ce qui est ou n'est pas un bombardement. Cette partie n'a jamais pu etre testé du au manque de puissance de calcul.<br>
+Afin d'utiliser la detection, il est necessaire d'avoir des images labelisées (cf module model).
+
+### Les modules **prepare** et **datasets**
+Comme pour la partie d'augmentation, ces deux modules sont utilisés afin de preparer nos données et de les stocker dans un object utilisable par pytorch.
+- prepare<br>
+*--images-dir* : est le chemin vers le repertoire ou nous avons nos images <br>
+*--label-dir* : est le chemin vers le repertoire ou nous avons nos la labelisation de nos images <br>
+*--output-dir* : est le chemin vers le fihcier hdf5 que nous souhaitons créer (ex. "dataset.h5"). <br> 
+*--train* : est un parametre qui permet de specifier si nous preparons les images à l'entrainement <br>
+### Le module **model**
+Implementation du model Yolov3 utilisant ce [depot git](https://github.com/eriklindernoren/PyTorch-YOLOv3).<br>
+Yolo est un algortihme qui identifie dans une image des objets specifiés. Dans notre cas, ce sont des bombardements. Afin de pouvoir les retrouver, nous avons besoin d'avoir des images labelisées (dont les parties de l'image contenant les bombardements sont encadrées).<br>
+Pour labeliser les images, l'outil [labelImg](https://github.com/tzutalin/labelImg) est utilisé.
+<center><img src="https://github.com/ydixon/yolo_v3/blob/master/doc/x_wing.gif" width="600"></center>
+### Les modules **train** et **detect**
+- train
+- detect
+
+
+## Architecture et module principal
+## Requirements
 
 - PyTorch
 - Numpy
@@ -99,6 +127,7 @@ PSNR = *10*$\times$$log_{10}$$\frac{d^2}{EQM}$ avec EQM l'erreur quadratique moy
 - tqdm
 - etc
   
-## Detection et comparaison d'images 
-## Axes d'ameliorations et de recherches
+# Detection et comparaison d'images 
+# Axes d'ameliorations et de recherches
+# Credit
 
