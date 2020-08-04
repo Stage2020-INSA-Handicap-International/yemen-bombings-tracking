@@ -33,17 +33,57 @@ Ce module utilise les meme arguments que fetcher
 
 ### Augmentation d'image
 
+L'augmentation d'image est un processus visant à ameliorer la qualité d'une image source. Les images Sentinel etant de trop "basse" qualité ($10m^2$), l'augmentation aurait permit au model de detection de mieux fonctionner.
+
 #### Le module **prepare**
+Ce module est un peu particulier car il est utilisé en amont afin de preparer nos données sous un format specifique utilisable par nos modeles.<br>
+Les images sont donc traitées selon la litterature (["Image Super-Resolution Using Deep Convolutional Networks"](https://arxiv.org/abs/1501.00092) pour le SRCNN par exemple) et stockées dans un fichier hdf5 (ce fichier permettant ensuite de plus facilement utiliser les images traitées et de les partager avec une vm ou un serveur).<br>
+Les images sont traitées de la maniere suivante: 
+- une image dites hr (haute resolution)
+- une image lr (low resolution) qui est l'image hr reduite d'un facteur X (parametre *--scale*) grâce à une interpolation bicubique.
+
+*--images-dir* : est le chemin vers le dossier qui contient les images qu'on souhaite preparer (le chemin du parametre processed_path).<br>
+*--output-dir* : est le chemin vers le fihcier hdf5 que nous souhaitons créer (ex. "data_out.h5").<br>
+*--model* : est un parametre qui permet d'indiquer pour quel model nous traitons les données.<br>
+*--eval* : est un parametre qui permet d'indiquer si nous preparons l'image à etre testée.<br>
+*--scale* : est un parametre qui permet d'indiquer quel est la diminution de resolution souhaitée.<br>
+
 #### Le module **datasets**
+
+Le module dataset permet de transformer le fichier hdf5 en un object pytorch ([Dataset](https://pytorch.org/docs/stable/data.html#torch.utils.data.Dataset)) interpretable par notre model (util pour l'apprentissage et l'évaluation)
+
 #### Le module **model**
 
-##### SRCNN
-<center><img src="SRCNN_figure.png"></center>
+Le module contient les differents modeles testés lors du developement<br>
+Les 3 modeles qui sont integrés sont:
+
+-  SRCNN<br>
+Model implementé selon ["Image Super-Resolution Using Deep Convolutional Networks"](https://arxiv.org/abs/1501.00092) et grace au [dépôt git](https://github.com/yjn870/SRCNN-pytorch/)<br>
+   <center><img src="SRCNN_figure.png"></center>
+
+-  FSRCNN<br>
+Model implementé selon ["Accelerating the Super-Resolution Convolutional Neural Network"](https://arxiv.org/abs/1608.00367) et grace au [dépôt git](https://github.com/yjn870/FSRCNN-pytorch/)<br>
+<center><img src="FSRCNN_figure.png"></center>
+
+-  SubPixel<br>
+Model implémenté selon ["Guided Super-Resolution as Pixel-to-Pixel Transformation"](https://arxiv.org/abs/1904.01501) et grace au [dépôt git](https://github.com/riccardodelutio/PixTransform).<br>
+Ce model permet d'appliqué l'information d'une image lr à une image hr afin d'avoir une image de bonne qualité avec les informations supplémentaires.<br>
+<center><img src="subpix_figure.png"></center>
+
+  
 
 #### Les module **train** et **test**
 #### Le module **augment**
-
 ### Detection des bombardements
 ### Architecture
+### Requirements
+
+- PyTorch
+- Numpy
+- h5py
+- tqdm
+- etc
+  
 ## Detection et comparaison d'images 
 ## Axes d'ameliorations et de recherches
+
