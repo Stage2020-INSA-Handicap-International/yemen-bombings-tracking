@@ -150,7 +150,23 @@ L'architecture est la suivante :
 - tqdm
 - etc
   
-# Detection et comparaison d'images 
+# Detection et comparaison d'images
+La procédure de prétraitement pour la comparaison entre les images en vue de détecter des bombardements est la suivante:
+- Obtention d'images source et cibles d'une même zone ;
+ <center><img src="difference/5_src.jpg" width="500"></center>
+ <center><img src="difference/5_target.jpg" width="500"></center>
+- Génération d'un masque des bâtiments à l'aide de l'API de [PicTerra](https://picterra.ch/) afin de ne pas détecter les changements sur d'autres zones (végétation, routes, etc.) ;
+<center><img src="difference/5_src_msk.png" width="500"></center>
+- Harmonisation de l'histogramme de couleurs de l'image source par rapport à celle cible ;
+<center><img src="difference/5_harm.png" width="500"></center>
+- (Optionnel) Application d'un filtre sur les deux images pour ne pas détecter des changements extrêmement ponctuels: conservation des contours avec un filtre de Kuwahara ;
+<center><img src="difference/5_filtr.png" width="500"></center>
+- Obtention de la différence entre les images et seuillage par un minimum de différence donné ;
+<center><img src="difference/5_grad.png" width="500"></center>
+<center><img src="difference/5_hsv.png" width="500"></center>
+- Application du masque des bâtiments sur l'image de différence.
+<center><img src="difference/5_masked.png" width="500"></center>
+
 # Axes d'ameliorations et de recherches
 # Credit
 
