@@ -168,5 +168,10 @@ La procédure de prétraitement pour la comparaison entre les images en vue de d
 <center><img src="difference/5_masked.png" width="500"></center>
 
 # Axes d'ameliorations et de recherches
+Homogénéisation des images : Transformations par homographie pour aligner les points de vue (ie. opencv).
+Si on a accès à beaucoup d’images : Workflows utilisés par les caméras de vidéosurveillance.
+
+Problèmes non validés :  Difficile de détecter les bâtiments quand la couleur du sol est proche de celle des bâtiments.
+
 # Credit
 
