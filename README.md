@@ -1,5 +1,5 @@
 # yemen-bombings-tracking
-Bombing tracing and detection project in Yemen using satellite images led by [BETTINGER Matthieu](), [HAFID Salim]() and [SADER Bruno]() for Humanity & Inclusion in collaboration with the Foundation INSA.
+Bombsite tracing and detection project in Yemen using satellite images led by [BETTINGER Matthieu](), [HAFID Salim]() and [SADER Bruno]() for Humanity & Inclusion in collaboration with the Foundation INSA.
 
 # Sommaire
 # Architecture d'augmentation et de detection des bombardements grâce à Sentinel
