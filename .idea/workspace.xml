@@ -1,0 +1,569 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="0fa00c88-48a2-4954-bc9f-aaefdc36e1b9" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1cJjzN3sH1E2Y52obDptEFJB3jO" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="true" />
+    <property name="WebServerToolWindowPanel.toolwindow.highlight.mappings" value="true" />
+    <property name="WebServerToolWindowPanel.toolwindow.highlight.symlinks" value="true" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.date" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="web.server" />
+  </component>
+  <component name="PyConsoleOptionsProvider">
+    <option name="myPythonConsoleState">
+      <console-settings>
+        <option name="useSoftWraps" value="true" />
+      </console-settings>
+    </option>
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Streaming" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.train_detection">
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <module name="yemen-bombings-tracking" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python">
+      <module name="yemen-bombings-tracking" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="sftp://bsader@35.205.134.128:22/usr/bin/python" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+      <option name="PARAMETERS" value="--district-name Jayshan --start-date 01062020 --end-date 07062020" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="prepare_augmentation_train" type="PythonConfigurationType" factoryName="Python" folderName="Augmentation">
+      <module name="yemen-bombings-tracking" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Augmentation" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Augmentation/prepare.py" />
+      <option name="PARAMETERS" value="--images-dir &quot;data/train&quot; --output-path &quot;train_dataset.h5&quot; --scale 4" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="prepare_augmentation_train_FSRCNN" type="PythonConfigurationType" factoryName="Python" folderName="Augmentation">
+      <module name="yemen-bombings-tracking" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Augmentation" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Augmentation/prepare.py" />
+      <option name="PARAMETERS" value="--images-dir &quot;data/train&quot; --output-path &quot;train_dataset.h5&quot; --scale 4" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="prepare_augmentation_val" type="PythonConfigurationType" factoryName="Python" folderName="Augmentation">
+      <module name="yemen-bombings-tracking" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Augmentation" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Augmentation/prepare.py" />
+      <option name="PARAMETERS" value="--images-dir &quot;data/val&quot; --output-path &quot;val_dataset.h5&quot; --scale 4 --eval" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="prepare_augmentation_val_FSRCNN" type="PythonConfigurationType" factoryName="Python" folderName="Augmentation">
+      <module name="yemen-bombings-tracking" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Augmentation" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Augmentation/prepare.py" />
+      <option name="PARAMETERS" value="--images-dir &quot;data/val&quot; --output-path &quot;train_dataset.h5&quot; --scale 4 --eval" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="prepare_detection_train" type="PythonConfigurationType" factoryName="Python" folderName="Detection">
+      <module name="yemen-bombings-tracking" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="sshConfig://bsader@35.205.134.128:22 key/usr/bin/python" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Detection" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Detection/prepare.py" />
+      <option name="PARAMETERS" value="--train" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="process_sentinel" type="PythonConfigurationType" factoryName="Python" folderName="Streaming">
+      <module name="yemen-bombings-tracking" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="sshConfig://bsader@35.195.135.182:22 key/usr/bin/python" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Streaming" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Streaming/processor.py" />
+      <option name="PARAMETERS" value="--district-name &quot;Mawiyah&quot; --start-date &quot;01062020&quot; --end-date &quot;04062020&quot;" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="test_augmentation_SRCNN" type="PythonConfigurationType" factoryName="Python" folderName="Augmentation">
+      <module name="yemen-bombings-tracking" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Augmentation" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Augmentation/test.py" />
+      <option name="PARAMETERS" value="--weights-file &quot;outputs/x4/SRCNN_best.pth&quot; --image-dir &quot;data/test/&quot; --scale 4 --test-data" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="test_augmentation_Subpix" type="PythonConfigurationType" factoryName="Python" folderName="Augmentation">
+      <module name="yemen-bombings-tracking" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="sftp://bsader@35.205.134.128:22/usr/bin/python3" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Augmentation" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Augmentation/test.py" />
+      <option name="PARAMETERS" value="--weights-file &quot;outputs/x4/Subpixel_best.pth&quot; --image-dir &quot;data/test/&quot; --scale 4 --test-data" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="test_augmentation_processed_data" type="PythonConfigurationType" factoryName="Python" folderName="Augmentation">
+      <module name="yemen-bombings-tracking" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Augmentation" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Augmentation/test.py" />
+      <option name="PARAMETERS" value="--weights-file &quot;outputs/x4/SRCNN_best.pth&quot; --image-dir &quot;data/processed/&quot; --scale 4 --test-data" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="test_streaming" type="PythonConfigurationType" factoryName="Python" folderName="Streaming">
+      <module name="yemen-bombings-tracking" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="/usr/local/bin/python3.7" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Streaming" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Streaming/test.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="train_augmentation_FSRCNN" type="PythonConfigurationType" factoryName="Python" folderName="Augmentation">
+      <module name="yemen-bombings-tracking" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Augmentation" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Augmentation/train.py" />
+      <option name="PARAMETERS" value="--train-file &quot;train_dataset.h5&quot; --val-file &quot;val_dataset.h5&quot; --outputs-dir &quot;outputs&quot; --scale 4 --num-epochs 5 --model &quot;FSRCNN&quot;" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="train_augmentation_Subpix" type="PythonConfigurationType" factoryName="Python" folderName="Augmentation">
+      <module name="yemen-bombings-tracking" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Augmentation" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Augmentation/train.py" />
+      <option name="PARAMETERS" value="--train-file &quot;train_dataset.h5&quot; --val-file &quot;val_dataset.h5&quot; --outputs-dir &quot;outputs&quot; --scale 4 --num-epochs 1 --model &quot;Subpixel&quot;" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="train_detection" type="PythonConfigurationType" factoryName="Python" folderName="Detection">
+      <module name="yemen-bombings-tracking" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Detection" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <PathMappingSettings>
+        <option name="pathMappings">
+          <list>
+            <mapping local-root="$PROJECT_DIR$" remote-root="/home/bsader/yemen-bombings-tracking" />
+          </list>
+        </option>
+      </PathMappingSettings>
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Detection/train.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.prepare_augmentation_train" />
+      <item itemvalue="Python.prepare_augmentation_val" />
+      <item itemvalue="Python.test_augmentation_SRCNN" />
+      <item itemvalue="Python.test_augmentation_processed_data" />
+      <item itemvalue="Python.train_augmentation_Subpix" />
+      <item itemvalue="Python.test_augmentation_Subpix" />
+      <item itemvalue="Python.prepare_augmentation_train_FSRCNN" />
+      <item itemvalue="Python.prepare_augmentation_val_FSRCNN" />
+      <item itemvalue="Python.train_augmentation_FSRCNN" />
+      <item itemvalue="Python.train_detection" />
+      <item itemvalue="Python.prepare_detection_train" />
+      <item itemvalue="Python.process_sentinel" />
+      <item itemvalue="Python.test_streaming" />
+      <item itemvalue="Python.main" />
+    </list>
+  </component>
+  <component name="StructureViewFactory">
+    <option name="ACTIVE_ACTIONS" value=",SHOW_INHERITED" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0fa00c88-48a2-4954-bc9f-aaefdc36e1b9" name="Default Changelist" comment="" />
+      <created>1590253851963</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1590253851963</updated>
+      <workItem from="1590253856648" duration="989000" />
+      <workItem from="1590330330930" duration="372000" />
+      <workItem from="1590389041536" duration="1230000" />
+      <workItem from="1590391984462" duration="21080000" />
+      <workItem from="1590482903677" duration="54016000" />
+      <workItem from="1590754649549" duration="11044000" />
+      <workItem from="1591089018552" duration="12950000" />
+      <workItem from="1591166832854" duration="29691000" />
+      <workItem from="1591340630638" duration="6588000" />
+      <workItem from="1591600407185" duration="26894000" />
+      <workItem from="1591695891879" duration="255000" />
+      <workItem from="1591696181531" duration="2258000" />
+      <workItem from="1591698594319" duration="290000" />
+      <workItem from="1591704741755" duration="21938000" />
+      <workItem from="1592551093619" duration="126000" />
+      <workItem from="1593417787056" duration="3662000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="495" y="171" key="#Deployment" timestamp="1593418369072">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="880" y="205" key="#Deployment/-1440.0.1440.900/0.0.2560.1080@0.0.2560.1080" timestamp="1591698865870" />
+    <state x="495" y="171" key="#Deployment/0.0.1440.900@0.0.1440.900" timestamp="1593418369072" />
+    <state x="354" y="135" key="#Inspections" timestamp="1591707967721">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="354" y="135" key="#Inspections/0.0.1440.900@0.0.1440.900" timestamp="1591707967721" />
+    <state x="880" y="217" width="800" height="717" key="#Intentions" timestamp="1590254328115">
+      <screen x="0" y="23" width="2560" height="1057" />
+    </state>
+    <state x="880" y="217" width="800" height="717" key="#Intentions/-1440.23.1440.877/0.23.2560.1057@0.23.2560.1057" timestamp="1590254328115" />
+    <state x="527" y="174" key="#Options" timestamp="1593418342625">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="936" y="209" key="#Options/-1440.0.1440.900/0.0.2560.1080@0.0.2560.1080" timestamp="1591698823579" />
+    <state x="527" y="174" key="#Options/0.0.1440.900@0.0.1440.900" timestamp="1593418342625" />
+    <state x="537" y="72" key="#SSH_Configurations" timestamp="1591706756399">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="955" y="86" key="#SSH_Configurations/-1440.0.1440.900/0.0.2560.1080@0.0.2560.1080" timestamp="1591698691539" />
+    <state x="912" y="66" key="#SSH_Configurations/-1440.23.1440.877/0.0.2560.1080@0.0.2560.1080" timestamp="1591685544416" />
+    <state x="537" y="72" key="#SSH_Configurations/0.0.1440.900@0.0.1440.900" timestamp="1591706756399" />
+    <state x="912" y="66" key="#SSH_Configurations/0.0.2560.1080@0.0.2560.1080" timestamp="1590852226140" />
+    <state x="912" y="88" key="#SSH_Configurations/0.23.2560.1057@0.23.2560.1057" timestamp="1590330645970" />
+    <state x="158" y="165" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1591943081913">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="1157" y="164" key="#com.intellij.execution.impl.EditConfigurationsDialog/-1440.0.1440.900/0.0.2560.1080@0.0.2560.1080" timestamp="1591878577981" />
+    <state x="1066" y="89" key="#com.intellij.execution.impl.EditConfigurationsDialog/-1440.23.1440.877/0.0.2560.1080@0.0.2560.1080" timestamp="1590584398495" />
+    <state x="1066" y="110" key="#com.intellij.execution.impl.EditConfigurationsDialog/-1440.23.1440.877/0.23.2560.1057@0.23.2560.1057" timestamp="1590394796871" />
+    <state x="158" y="165" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1440.900@0.0.1440.900" timestamp="1591943081913" />
+    <state x="1021" y="74" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.2560.1080@0.0.2560.1080" timestamp="1591177763148" />
+    <state x="744" y="213" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.2560.1057@0.23.2560.1057" timestamp="1590330376412" />
+    <state x="1004" y="344" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1591343836117">
+      <screen x="0" y="0" width="2560" height="1080" />
+    </state>
+    <state x="1004" y="344" key="#com.intellij.fileTypes.FileTypeChooser/-1440.0.1440.900/0.0.2560.1080@0.0.2560.1080" timestamp="1591343836117" />
+    <state x="1004" y="360" key="#com.intellij.fileTypes.FileTypeChooser/-1440.23.1440.877/0.23.2560.1057@0.23.2560.1057" timestamp="1590397225032" />
+    <state x="1233" y="217" key="#com.intellij.ide.macro.MacrosDialog" timestamp="1590393061732">
+      <screen x="0" y="23" width="2560" height="1057" />
+    </state>
+    <state x="1233" y="217" key="#com.intellij.ide.macro.MacrosDialog/-1440.23.1440.877/0.23.2560.1057@0.23.2560.1057" timestamp="1590393061732" />
+    <state x="987" y="211" key="#com.intellij.openapi.keymap.impl.ui.EditKeymapsDialog" timestamp="1590499709469">
+      <screen x="0" y="0" width="2560" height="1080" />
+    </state>
+    <state x="987" y="211" key="#com.intellij.openapi.keymap.impl.ui.EditKeymapsDialog/-1440.0.1440.900/0.0.2560.1080@0.0.2560.1080" timestamp="1590499709469" />
+    <state x="100" y="79" width="2360" height="900" key="DirDiffDialog" timestamp="1591603273243">
+      <screen x="0" y="0" width="2560" height="1080" />
+    </state>
+    <state x="100" y="79" width="2360" height="900" key="DirDiffDialog/-1440.0.1440.900/0.0.2560.1080@0.0.2560.1080" timestamp="1591603273243" />
+    <state x="100" y="100" width="2360" height="880" key="DirDiffDialog/-1440.23.1440.877/0.23.2560.1057@0.23.2560.1057" timestamp="1590409822378" />
+    <state x="296" y="133" key="SettingsEditor" timestamp="1593419381096">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="527" y="159" key="SettingsEditor/-1440.0.1440.900/0.0.2560.1080@0.0.2560.1080" timestamp="1591859615223" />
+    <state x="206" y="69" key="SettingsEditor/-1440.23.1440.877/0.0.2560.1080@0.0.2560.1080" timestamp="1591697624301" />
+    <state x="206" y="91" key="SettingsEditor/-1440.23.1440.877/0.23.2560.1057@0.23.2560.1057" timestamp="1590394827681" />
+    <state x="296" y="133" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1593419381096" />
+    <state x="527" y="159" key="SettingsEditor/0.0.2560.1080@0.0.2560.1080" timestamp="1590852232671" />
+    <state x="206" y="91" key="SettingsEditor/0.23.2560.1057@0.23.2560.1057" timestamp="1590330700791" />
+    <state width="720" height="450" key="XDebugger.FullValuePopup" timestamp="1591707660063">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1280" height="540" key="XDebugger.FullValuePopup/-1440.0.1440.900/0.0.2560.1080@0.0.2560.1080" timestamp="1590588271609" />
+    <state width="720" height="450" key="XDebugger.FullValuePopup/0.0.1440.900@0.0.1440.900" timestamp="1591707660063" />
+    <state x="462" y="320" key="com.jetbrains.plugins.remotesdk.ui.RemoteMappingsConfiguration" timestamp="1591706466296">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="822" y="384" key="com.jetbrains.plugins.remotesdk.ui.RemoteMappingsConfiguration/-1440.0.1440.900/0.0.2560.1080@0.0.2560.1080" timestamp="1591698457080" />
+    <state x="462" y="320" key="com.jetbrains.plugins.remotesdk.ui.RemoteMappingsConfiguration/0.0.1440.900@0.0.1440.900" timestamp="1591706466296" />
+    <state x="987" y="129" width="586" height="822" key="find.popup" timestamp="1591690817387">
+      <screen x="0" y="0" width="2560" height="1080" />
+    </state>
+    <state x="987" y="129" width="586" height="822" key="find.popup/-1440.0.1440.900/0.0.2560.1080@0.0.2560.1080" timestamp="1591690817387" />
+    <state x="960" y="234" key="ftp.server.browser" timestamp="1591706772961">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="1187" y="272" key="ftp.server.browser/-1440.0.1440.900/0.0.2560.1080@0.0.2560.1080" timestamp="1591698364921" />
+    <state x="1187" y="289" key="ftp.server.browser/-1440.23.1440.877/0.23.2560.1057@0.23.2560.1057" timestamp="1590390754772" />
+    <state x="960" y="234" key="ftp.server.browser/0.0.1440.900@0.0.1440.900" timestamp="1591706772961" />
+    <state x="945" y="241" key="search.everywhere.popup" timestamp="1590499294679">
+      <screen x="0" y="0" width="2560" height="1080" />
+    </state>
+    <state x="945" y="241" key="search.everywhere.popup/-1440.23.1440.877/0.0.2560.1080@0.0.2560.1080" timestamp="1590499294679" />
+  </component>
+</project>
